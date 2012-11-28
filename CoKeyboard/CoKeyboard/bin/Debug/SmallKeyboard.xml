@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CoKeyboard</name>
+    </assembly>
+    <members>
+        <member name="T:OSC.NET.OSCPacket">
+            <summary>
+            OSCPacket
+            </summary>
+        </member>
+        <member name="T:OSC.NET.OSCMessage">
+            <summary>
+            OSCMessage
+            </summary>
+        </member>
+        <member name="T:OSC.NET.OSCBundle">
+            <summary>
+            OSCBundle
+            </summary>
+        </member>
+        <member name="T:OSC.NET.OSCTransmitter">
+            <summary>
+            OSCTransmitter
+            </summary>
+        </member>
+        <member name="T:OSC.NET.OSCReceiver">
+            <summary>
+            OSCReceiver
+            </summary>
+        </member>
+        <member name="M:CoKeyboard.Collab.ClienteGT.updates_SessionMessagesReceived(GT.Net.ISessionChannel)">
+            <summary>
+            Process an update about my fellows
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="T:My.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:My.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:My.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

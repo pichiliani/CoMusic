@@ -1,0 +1,5 @@
+C:\Arquivos de programas\HCI - UofS\GT\ClientRepeater\src\obj\Debug\ResolveAssemblyReference.cache
+C:\Arquivos de programas\HCI - UofS\GT\ClientRepeater\src\bin\Debug\ClientRepeater.exe
+C:\Arquivos de programas\HCI - UofS\GT\ClientRepeater\src\bin\Debug\ClientRepeater.pdb
+C:\Arquivos de programas\HCI - UofS\GT\ClientRepeater\src\obj\Debug\ClientRepeater.exe
+C:\Arquivos de programas\HCI - UofS\GT\ClientRepeater\src\obj\Debug\ClientRepeater.pdb

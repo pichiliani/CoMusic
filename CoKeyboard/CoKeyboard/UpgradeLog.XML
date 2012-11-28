@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SmallKeyboard">
+</Property><Property Name="Solution File" Value="C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\SmallKeyboard.sln">
+</Property><Property Name="User Options File" Value="C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\SmallKeyboard.suo">
+</Property><Property Name="Date" Value="quarta-feira, 18 de março de 2009">
+</Property><Property Name="Time" Value="14:59">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="SmallKeyboard.sln" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\SmallKeyboard.sln">
+</Event><Event ErrorLevel="0" Project="" Source="SmallKeyboard.suo" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\SmallKeyboard.suo">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="SmallKeyboard.csproj" Description="Project file successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\SmallKeyboard.csproj">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Form1.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Form1.Designer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Application.Designer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Application.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Resources.Designer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Application.myapp" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Application.myapp">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Settings.settings" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Form1.resx" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="Properties\Resources.resx" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="SmallKeyboard.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SmallKeyboard" Source="SmallKeyboard.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SmallKeyboard.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SmallKeyboard.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SmallKeyboard" Source="SmallKeyboard.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

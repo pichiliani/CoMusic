@@ -1,0 +1,100 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EEC385BF-261C-4F5B-A602-D3ECDFC2AC30}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GT.Common</RootNamespace>
+    <AssemblyName>GTBase</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>GTBase.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\GTBase.XML</DocumentationFile>
+    <NoWarn>1574 1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1574 1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=1.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Common.Logging\bin\net\2.0\release\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections.cs" />
+    <Compile Include="BitUtils.cs" />
+    <Compile Include="DataConverter.cs" />
+    <Compile Include="Probabilities.cs" />
+    <Compile Include="GetOpt.cs" />
+    <Compile Include="GMC\CompressedStream.cs" />
+    <Compile Include="GMC\HuffmanCompressor.cs" />
+    <Compile Include="GMC\TemplateBasedCompressor.cs" />
+    <Compile Include="GMC\GeneralMessageCompressor.cs" />
+    <Compile Include="GMC\GMCMarshaller.cs" />
+    <Compile Include="GMC\HuffmanEncodingTree.cs" />
+    <Compile Include="GMC\SuffixTrie.cs" />
+    <Compile Include="GMC\TrieCompressor.cs" />
+    <Compile Include="HPTimer.cs" />
+    <Compile Include="Net\ClientServer.cs" />
+    <Compile Include="Net\LargeObjectMarshaller.cs" />
+    <Compile Include="Net\PacketScheduling.cs" />
+    <Compile Include="Net\Stats.cs" />
+    <Compile Include="Net\MillipedeBase.cs" />
+    <Compile Include="Net\TransportPacket.cs" />
+    <Compile Include="Net\Utils.cs" />
+    <Compile Include="Pool.cs" />
+    <Compile Include="SlidingWindowManager.cs" />
+    <Compile Include="Statistics.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="Lifecycle.cs" />
+    <Compile Include="Net\Enums.cs" />
+    <Compile Include="Net\Marshalling.cs" />
+    <Compile Include="Net\Messages.cs" />
+    <Compile Include="Net\NetExceptions.cs" />
+    <Compile Include="Net\QoS.cs" />
+    <Compile Include="Net\TcpTransport.cs" />
+    <Compile Include="Net\Transports.cs" />
+    <Compile Include="Net\Tuples.cs" />
+    <Compile Include="Net\UdpTransport.cs" />
+    <Compile Include="Streams.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GTBase.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

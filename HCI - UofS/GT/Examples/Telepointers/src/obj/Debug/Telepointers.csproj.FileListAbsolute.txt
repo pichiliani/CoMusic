@@ -1,0 +1,30 @@
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Telepointers.exe
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Telepointers.pdb
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\ResolveAssemblyReference.cache
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.Form1.resources
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.Properties.Resources.resources
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.csproj.GenerateResource.Cache
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.exe
+C:\Arquivos de programas\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.exe
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\ResolveAssemblyReference.cache
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.Form1.resources
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.Properties.Resources.resources
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\obj\Debug\Telepointers.csproj.GenerateResource.Cache
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Telepointers.exe
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Telepointers.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTBase.dll
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTClient.dll
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTServer.dll
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTUI.dll
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Common.Logging.dll
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTClient.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTClient.xml
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTServer.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTServer.xml
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTBase.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTBase.xml
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\Common.Logging.xml
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTUI.pdb
+C:\CoMusic\HCI - UofS\GT\Examples\Telepointers\src\bin\Debug\GTUI.xml

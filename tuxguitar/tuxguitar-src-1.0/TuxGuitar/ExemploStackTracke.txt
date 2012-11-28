@@ -1,0 +1,106 @@
+getScoreNoteColor() de TGResources.java
+java.lang.ArithmeticException: / by zero
+        at org.herac.tuxguitar.gui.editors.tab.TGResources.getScoreNoteColor(Unk
+nown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.setScoreSilence
+Style(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.setStyle(Unknown Sourc
+e)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.paintSilence(Unknown S
+ource)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.paint(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl.paintComponents(Unk
+nown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl.paintMeasure(Unknow
+n Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.paintMeasure(Un
+known Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.PageViewLayout.paintLine(U
+nknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.PageViewLayout.paintSong(U
+nknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.paint(Unknown S
+ource)
+        at org.herac.tuxguitar.gui.editors.tab.Tablature.paintTablature(Unknown
+Source)
+        at org.herac.tuxguitar.gui.editors.tab.TablaturePaintListener.paintContr
+ol(Unknown Source)
+        at org.eclipse.swt.widgets.TypedListener.handleEvent(Unknown Source)
+        at org.eclipse.swt.widgets.EventTable.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Composite.WM_PAINT(Unknown Source)
+        at org.eclipse.swt.widgets.Control.windowProc(Unknown Source)
+        at org.eclipse.swt.widgets.Display.windowProc(Unknown Source)
+        at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+        at org.eclipse.swt.internal.win32.OS.DispatchMessage(Unknown Source)
+        at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+        at org.herac.tuxguitar.gui.util.DialogUtils.openDialog(Unknown Source)
+        at org.herac.tuxguitar.gui.util.DialogUtils.openDialog(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.PianoEditor.show(Unknown Source)
+        at org.herac.tuxguitar.gui.TuxGuitar$9.run(Unknown Source)
+        at org.herac.tuxguitar.gui.helper.SyncThread$1.run(Unknown Source)
+        at org.herac.tuxguitar.util.TGSynchronizer$TGSynchronizerTask.run(Unknow
+n Source)
+        at org.herac.tuxguitar.gui.TuxGuitar$1$1.run(Unknown Source)
+        at org.eclipse.swt.widgets.RunnableLock.run(Unknown Source)
+        at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Unknown Source)
+
+        at org.eclipse.swt.widgets.Display.runAsyncMessages(Unknown Source)
+        at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+        at org.herac.tuxguitar.gui.TuxGuitar.displayGUI(Unknown Source)
+        at org.herac.tuxguitar.gui.TGMain.main(Unknown Source)
+getScoreNoteColor() de TGResources.java
+java.lang.ArithmeticException: / by zero
+        at org.herac.tuxguitar.gui.editors.tab.TGResources.getScoreNoteColor(Unk
+nown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.setScoreSilence
+Style(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.setStyle(Unknown Sourc
+e)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.paintSilence(Unknown S
+ource)
+        at org.herac.tuxguitar.gui.editors.tab.TGBeatImpl.paint(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl.paintComponents(Unk
+nown Source)
+        at org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl.paintMeasure(Unknow
+n Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.paintMeasure(Un
+known Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.PageViewLayout.paintLine(U
+nknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.PageViewLayout.paintSong(U
+nknown Source)
+        at org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout.paint(Unknown S
+ource)
+        at org.herac.tuxguitar.gui.editors.tab.Tablature.paintTablature(Unknown
+Source)
+        at org.herac.tuxguitar.gui.editors.tab.TablaturePaintListener.paintContr
+ol(Unknown Source)
+        at org.eclipse.swt.widgets.TypedListener.handleEvent(Unknown Source)
+        at org.eclipse.swt.widgets.EventTable.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Widget.sendEvent(Unknown Source)
+        at org.eclipse.swt.widgets.Composite.WM_PAINT(Unknown Source)
+        at org.eclipse.swt.widgets.Control.windowProc(Unknown Source)
+        at org.eclipse.swt.widgets.Display.windowProc(Unknown Source)
+        at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+        at org.eclipse.swt.internal.win32.OS.DispatchMessage(Unknown Source)
+        at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+        at org.herac.tuxguitar.gui.util.DialogUtils.openDialog(Unknown Source)
+        at org.herac.tuxguitar.gui.util.DialogUtils.openDialog(Unknown Source)
+        at org.herac.tuxguitar.gui.editors.PianoEditor.show(Unknown Source)
+        at org.herac.tuxguitar.gui.TuxGuitar$9.run(Unknown Source)
+        at org.herac.tuxguitar.gui.helper.SyncThread$1.run(Unknown Source)
+        at org.herac.tuxguitar.util.TGSynchronizer$TGSynchronizerTask.run(Unknow
+n Source)
+        at org.herac.tuxguitar.gui.TuxGuitar$1$1.run(Unknown Source)
+        at org.eclipse.swt.widgets.RunnableLock.run(Unknown Source)
+        at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Unknown Source)
+
+        at org.eclipse.swt.widgets.Display.runAsyncMessages(Unknown Source)
+        at org.eclipse.swt.widgets.Display.readAndDispatch(Unknown Source)
+        at org.herac.tuxguitar.gui.TuxGuitar.displayGUI(Unknown Source)
+        at org.herac.tuxguitar.gui.TGMain.main(Unknown Source)

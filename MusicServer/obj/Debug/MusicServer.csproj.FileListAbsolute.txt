@@ -1,0 +1,10 @@
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\obj\Debug\ResolveAssemblyReference.cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\bin\Debug\MusicServer.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\bin\Debug\MusicServer.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\obj\Debug\MusicServer.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\obj\Debug\MusicServer.pdb
+C:\CoMusic\MusicServer\obj\Debug\MusicServer.pdb
+C:\CoMusic\MusicServer\bin\Debug\MusicServer.exe
+C:\CoMusic\MusicServer\bin\Debug\MusicServer.pdb
+C:\CoMusic\MusicServer\obj\Debug\ResolveAssemblyReference.cache
+C:\CoMusic\MusicServer\obj\Debug\MusicServer.exe

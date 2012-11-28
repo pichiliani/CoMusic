@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ServerTeste">
+</Property><Property Name="Solution File" Value="C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\ServerTeste.sln">
+</Property><Property Name="User Options File" Value="C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\ServerTeste.suo">
+</Property><Property Name="Date" Value="terça-feira, 24 de março de 2009">
+</Property><Property Name="Time" Value="15:06">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ServerTeste.sln" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\ServerTeste.sln">
+</Event><Event ErrorLevel="0" Project="" Source="ServerTeste.suo" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\ServerTeste.suo">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="CollabServer.csproj" Description="Project file successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\CollabServer.csproj">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="CollabServer.csproj.user" Description="Project user file successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\CollabServer.csproj.user">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="AssemblyInfo.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="CollabServer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\CollabServer.cs">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="Properties\Settings.settings" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="App.ico" Description="File successfully backed up as C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\Backup1\App.ico">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="CollabServer.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="CollabServer" Source="CollabServer.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ServerTeste.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ServerTeste.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CollabServer" Source="CollabServer.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

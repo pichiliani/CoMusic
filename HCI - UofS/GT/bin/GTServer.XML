@@ -1,0 +1,763 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTServer</name>
+    </assembly>
+    <members>
+        <member name="T:GT.Net.TcpAcceptor">
+            <summary>
+            Accept incoming connections across a TCP socket.
+            </summary>
+        </member>
+        <member name="T:GT.Net.IPBasedAcceptor">
+            <summary>
+            A base class for IP-based acceptors.
+            </summary>
+        </member>
+        <member name="T:GT.Net.BaseAcceptor">
+            <summary>
+            A base class for acceptor implementations.
+            </summary>
+        </member>
+        <member name="T:GT.Net.IAcceptor">
+            <summary>
+            An object responsible for negotiating and accepting incoming connections.
+            The remote service is often implemented using an <c>IConnector</c>.
+            Acceptors should throw a <see cref="T:GT.Net.TransportError"/> if they
+            cannot be successfully started.
+            See
+            <blockquote>
+               DC Schmidt (1997). Acceptor and connector: A family of object 
+               creational patterns for initializing communication services. 
+               In R Martin, F Buschmann, D Riehle (Eds.), Pattern Languages of 
+               Program Design 3. Addison-Wesley
+               &lt;http://www.cs.wustl.edu/~schmidt/PDF/Acc-Con.pdf&gt;
+            </blockquote>
+            </summary>
+        </member>
+        <member name="M:GT.Net.IAcceptor.Update">
+            <summary>
+            Run a cycle to process any pending connection negotiations.  
+            This method is <strong>not</strong> re-entrant and should not 
+            be called from GT callbacks.
+            </summary>
+            <exception cref="T:GT.Net.TransportError">thrown in case of an error</exception>
+        </member>
+        <member name="E:GT.Net.IAcceptor.ValidateTransport">
+            <summary>
+            Provide an opportunity for callers to validate an incoming transport.  
+            If the transport fails, set <see cref="P:GT.Net.ValidateTransportArgs.Valid"/>
+            to false and or call <see cref="M:GT.Net.ValidateTransportArgs.Reject(System.String)"/> to
+            also add a reason.
+            </summary>
+        </member>
+        <member name="E:GT.Net.IAcceptor.NewTransportAccepted">
+            <summary>
+            Triggered when a new incoming connection has been successfully
+            negotiated.
+            </summary>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.Update">
+            <summary>
+            Run a cycle to process any pending events for this acceptor.
+            This method is <strong>not</strong> re-entrant.
+            </summary>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.Start">
+            <exception cref="T:GT.Net.TransportError">thrown if the acceptor is
+            unable to initialize</exception>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.CheckAndNotify(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Check to see if the new incoming transport <see cref="!:transport"/> should
+            be accepted.  If accepted, then call <see cref="M:GT.Net.BaseAcceptor.TransportAccepted(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})"/>.  
+            Otherwise call <see cref="M:GT.Net.BaseAcceptor.TransportRejected(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})"/>.
+            </summary>
+            <param name="transport">the candidate transport</param>
+            <param name="capabilities">the capabilities of the remote</param>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.TransportAccepted(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            The transport has passed the validation steps; trigger the
+            <see cref="E:GT.Net.BaseAcceptor.NewTransportAccepted"/> event.  Subclasses may
+            override but must ensure the <see cref="E:GT.Net.BaseAcceptor.NewTransportAccepted"/>
+            event is still triggered.
+            </summary>
+            <param name="transport">the candidate transport</param>
+            <param name="capabilities">the capabilities of the remote</param>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.TransportRejected(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            The transport has failed the validation steps and must be disposed of. 
+            Subclasses may override but must ensure the transport is disposed.
+            </summary>
+            <param name="transport">the candidate transport</param>
+            <param name="capabilities">the capabilities of the remote</param>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.ShouldAcceptTransport(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Consult interested parties to see whether the incoming transport <see cref="!:t"/>
+            should be accepted.  Subclasses may choose to override this method to add
+            additional checks.  This method will log a false result with any accompanying
+            reasons as to why the connection was rejected.
+            </summary>
+            <param name="transport">the incoming transport</param>
+            <param name="capabilities">the capabilities from the remote</param>
+            <returns>true if the new transport passes muster, false otherwise</returns>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.NotifyValidateTransport(System.Object,GT.Net.ValidateTransportArgs)">
+            <summary>
+            This only triggers the <see cref="E:GT.Net.BaseAcceptor.ValidateTransport"/> event; subclasses
+            of <see cref="T:GT.Net.BaseAcceptor"/> likely mean to call <see cref="M:GT.Net.BaseAcceptor.ShouldAcceptTransport(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})"/>
+            instead.
+            </summary>
+            <param name="acceptor">the acceptor triggering the query</param>
+            <param name="args">the validation state</param>
+        </member>
+        <member name="M:GT.Net.BaseAcceptor.NotifyNewTransport(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Notify interested parties that a new transport connection has been
+            successfully negotiated.
+            </summary>
+            <param name="t">the newly-negotiated transport</param>
+            <param name="capabilities">a dictionary describing the
+                capabilities of the remote system</param>
+        </member>
+        <member name="P:GT.Net.BaseAcceptor.Active">
+            <summary>
+            Indicate whether this instance is currently active (i.e., started).
+            </summary>
+        </member>
+        <member name="F:GT.Net.TcpAcceptor.LISTENER_BACKLOG">
+            <summary>
+            The listening backlog to use for the server socket.  
+            Historically the maximum was 5; some newer OS' support
+            up to 128.
+            </summary>
+        </member>
+        <member name="M:GT.Net.TcpAcceptor.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Create a new instance to listen on the specified address and port.
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+        </member>
+        <member name="P:GT.Net.TcpAcceptor.ProtocolDescriptor">
+            <summary>
+            Describe the on-wire protocol version spoken by this instance
+            </summary>
+        </member>
+        <member name="T:GT.Net.MessagesSentNotification">
+            <summary>Notification of outgoing messages</summary>
+            <param name="msgs">The outgoing messages.</param>
+            <param name="list">The destinations for the messages</param>
+            <param name="mdr">How the message is to be sent</param>
+        </member>
+        <member name="T:GT.Net.ClientsRemovedHandler">
+            <summary>Handles when clients leave the server.</summary>
+            <param name="list">The clients who've left.</param>
+        </member>
+        <member name="T:GT.Net.ClientsJoinedHandler">
+            <summary>Handles when clients join the server.</summary>
+            <param name="list">The clients who've joined.</param>
+        </member>
+        <member name="T:GT.Net.ServerConfiguration">
+            <summary>
+            Describes the configuration details and defines policy decisions for
+            a GT server.
+            </summary>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.CreateMarshaller">
+            <summary>
+            Create the marsheller for the server instance.
+            </summary>
+            <returns>the marshaller</returns>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.CreateAcceptors">
+            <summary>
+            Create the appropriate transport acceptors.
+            </summary>
+            <returns>a collection of acceptors</returns>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.ValidateIncomingTransport(GT.Net.Server,GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Check an incoming connection; if the connection is deemed to be
+            invalid, then return a descriptive reason.
+            </summary>
+            <param name="server">the server instance</param>
+            <param name="transport">the transport in question</param>
+            <param name="capabilities">the capabilities from the remote</param>
+            <returns>null if valid, a reason if invalid</returns>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.BuildServer">
+            <summary>
+            Create a server instance as repreented by this configuration instance.
+            </summary>
+            <returns>the created server</returns>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.CreateClientConnexion(GT.Net.Server,System.Guid,System.Int32)">
+            <summary>
+            Create an connexion representing the client.
+            </summary>
+            <param name="owner">the associated server instance</param>
+            <param name="clientGuid">the client's GUID</param>
+            <param name="clientIdentity">the server-unique identity for the client</param>
+            <returns>the client connexion</returns>
+        </member>
+        <member name="M:GT.Net.ServerConfiguration.DefaultChannelRequirements">
+            <summary>
+            Return the default channel requirements for channels without specified
+            channel requirements.
+            </summary>
+            <returns>the channel requirements</returns>
+        </member>
+        <member name="T:GT.Net.DefaultServerConfiguration">
+            <summary>
+            A sample server configuration.  <strong>This class definition may change 
+            in dramatic  ways in future releases.</strong>  This configuration should 
+            serve only as an example, and applications should make their own server 
+            configurations by copying this instance.  
+            </summary>
+        </member>
+        <member name="F:GT.Net.DefaultServerConfiguration.port">
+            <summary>
+            The default configuration uses this port.
+            </summary>
+        </member>
+        <member name="M:GT.Net.DefaultServerConfiguration.#ctor">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
+        <member name="M:GT.Net.DefaultServerConfiguration.#ctor(System.Int32)">
+            <summary>
+            Construct the configuration instance using the provided port.
+            </summary>
+            <param name="port">the IP port for the server to use</param>
+        </member>
+        <member name="M:GT.Net.DefaultServerConfiguration.#ctor(System.Int32,System.TimeSpan)">
+            <summary>
+            Create new configuration with given port and ping interval
+            </summary>
+            <param name="port">the port to be used for IP-based transports</param>
+            <param name="pingInterval">the client-ping frequency (milliseconds to wait between pings)</param>
+        </member>
+        <member name="M:GT.Net.DefaultServerConfiguration.CreateMarshaller">
+            <summary>
+            Create the marshaller for the server instance.
+            </summary>
+            <returns>the marshaller</returns>
+        </member>
+        <member name="M:GT.Net.DefaultServerConfiguration.CreateAcceptors">
+            <summary>
+            Create the appropriate transport acceptors.
+            </summary>
+            <returns>a collection of acceptors</returns>
+        </member>
+        <member name="T:GT.Net.Server">
+            <summary>Represents traditional server.</summary>
+        </member>
+        <member name="F:GT.Net.Server.configuration">
+            <summary>
+            A factory-like object responsible for providing the server's runtime
+            configuration.
+            </summary>
+        </member>
+        <member name="F:GT.Net.Server.clientIDs">
+            <summary>
+            All of the client identities that this server knows about.  
+            </summary>
+        </member>
+        <member name="M:GT.Net.Server.#ctor(System.Int32)">
+            <summary>Creates a new Server object.</summary>
+            <param name="port">The port to listen on.</param>
+        </member>
+        <member name="M:GT.Net.Server.#ctor(System.Int32,System.TimeSpan)">
+            <summary>Creates a new Server object.</summary>
+            <param name="port">The port to listen on.</param>
+            <param name="interval">The update interval at which to check 
+            for new connections or new messages.</param>
+        </member>
+        <member name="M:GT.Net.Server.#ctor(GT.Net.ServerConfiguration)">
+            <summary>Creates a new Server object.</summary>
+            <param name="sc">The server configuration object.</param>
+        </member>
+        <member name="M:GT.Net.Server.ToString">
+            <summary>
+            Create a descriptive string representation 
+            </summary>
+            <returns>a descriptive string representation</returns>
+        </member>
+        <member name="M:GT.Net.Server.Update">
+            <summary>
+            Run a cycle to process any pending events for the connexions or
+            other related objects for this instance.  This method is <strong>not</strong> 
+            re-entrant and should not be called from GT callbacks.
+            <strong>deprecated behaviour:</strong> the server is started if not active.
+            </summary>
+        </member>
+        <member name="M:GT.Net.Server.GetConnexionForClientGuid(System.Guid)">
+            <summary>Returns the client matching the provided GUID.</summary>
+            <param name="clientGuid">The remote client GUID.</param>
+            <returns>The client with that GUID.  If no match, then return null.</returns>
+        </member>
+        <member name="M:GT.Net.Server.GenerateIdentity">
+            <summary>Generates a identity number that clients (and this server) 
+            can use to identify each other.  These numbers are unique across this
+            server, but not necessarily between different servers.</summary>
+            <returns>The server-unique identity number</returns>
+        </member>
+        <member name="M:GT.Net.Server.Send(System.Byte[],System.Byte,System.Collections.Generic.ICollection{GT.Net.IConnexion},GT.Net.MessageDeliveryRequirements)">
+            <summary>Sends a byte array on <see cref="!:channelId"/> to many clients in an efficient manner.</summary>
+            <param name="buffer">The byte array to send</param>
+            <param name="channelId">The channel to be sent on</param>
+            <param name="list">The list of clients; if null then all clients</param>
+            <param name="mdr">How to send it (can be null)</param>
+        </member>
+        <member name="M:GT.Net.Server.Send(System.String,System.Byte,System.Collections.Generic.ICollection{GT.Net.IConnexion},GT.Net.MessageDeliveryRequirements)">
+            <summary>Sends a string on <see cref="!:channelId"/> to many clients in an efficient manner.</summary>
+            <param name="s">The string to send</param>
+            <param name="channelId">The channel to be sent on</param>
+            <param name="list">The list of clients; if null then all clients</param>
+            <param name="mdr">How to send it (can be null)</param>
+        </member>
+        <member name="M:GT.Net.Server.Send(System.Object,System.Byte,System.Collections.Generic.ICollection{GT.Net.IConnexion},GT.Net.MessageDeliveryRequirements)">
+            <summary>Sends an object on <see cref="!:channelId"/> to many clients in an efficient manner.</summary>
+            <param name="o">The object to send</param>
+            <param name="channelId">The channel to be sent on</param>
+            <param name="list">The list of clients; if null then all clients</param>
+            <param name="mdr">How to send it (can be null)</param>
+        </member>
+        <member name="M:GT.Net.Server.Send(GT.Net.Message,System.Collections.Generic.ICollection{GT.Net.IConnexion},GT.Net.MessageDeliveryRequirements)">
+            <summary>Send a message to many clients in an efficient manner.</summary>
+            <param name="message">The message to send</param>
+            <param name="list">The list of clients; if null then all clients</param>
+            <param name="mdr">How to send it (can be null)</param>
+        </member>
+        <member name="M:GT.Net.Server.Send(System.Collections.Generic.IList{GT.Net.Message},System.Collections.Generic.ICollection{GT.Net.IConnexion},GT.Net.MessageDeliveryRequirements)">
+            <summary>Sends a collection of messages in an efficient way to a list of clients.</summary>
+            <param name="messages">The list of messages to send</param>
+            <param name="list">The list of clients; if null then all clients</param>
+            <param name="mdr">How to send it (can be null)</param>
+        </member>
+        <member name="M:GT.Net.Server.GetChannelDeliveryRequirements(System.Byte)">
+            <summary>
+            Return the delivery requirements for a channel; if the channel has not hd
+            a set of delivery requirements configured, then return the default set.
+            </summary>
+            <param name="channelId">the channel</param>
+            <returns>the delivery requirements configured for the channel</returns>
+        </member>
+        <member name="M:GT.Net.Server.SetChannelDeliveryRequirements(System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Set the delivery requirements for a particular channel.
+            </summary>
+            <param name="channelId">the channel</param>
+            <param name="cdr">the delivery requirements to be configured; null to remove</param>
+        </member>
+        <member name="P:GT.Net.Server.Clients">
+            <summary>
+            Return the set of active clients to which this server is talking.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Server.Marshaller">
+            <summary>
+            Return the associated marshaller
+            </summary>
+        </member>
+        <member name="P:GT.Net.Server.Configuration">
+            <summary>
+            Return the server configuration object.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Server.ServerIdentity">
+            <summary>
+            Return this server's unique identity.
+            </summary>
+        </member>
+        <member name="E:GT.Net.Server.MessagesSent">
+            <summary>Invoked each time a message is sent.</summary>
+        </member>
+        <member name="E:GT.Net.Server.ClientsRemoved">
+            <summary>Invoked each time a client disconnects.</summary>
+        </member>
+        <member name="E:GT.Net.Server.ClientsJoined">
+            <summary>Invoked each time a client connects.</summary>
+        </member>
+        <member name="P:GT.Net.Server.Acceptors">
+            <summary>
+            Return the instance's acceptors
+            </summary>
+        </member>
+        <member name="T:GT.Net.ConnexionToClient">
+            <summary>Represents a logical connexion to a client, suitable for use of the server.</summary>
+        </member>
+        <member name="F:GT.Net.ConnexionToClient.clientGuid">
+            <summary>
+            The client's globally unique identifier (vs <see cref="P:GT.Net.IConnexion.Identity"/>,
+            which is only unique to the clients connected to <see cref="F:GT.Net.ConnexionToClient.owner"/>).
+            </summary>
+        </member>
+        <member name="M:GT.Net.ConnexionToClient.#ctor(GT.Net.Server,System.Guid,System.Int32)">
+            <summary>Creates a new ClientConnexion to communicate with.</summary>
+            <param name="s">The associated server instance.</param>
+            <param name="clientGuid">A globally unique identifier for the associated client.</param>
+            <param name="clientIdentity">The server-unique identity of this new client's connexion.</param>
+        </member>
+        <member name="M:GT.Net.ConnexionToClient.Send(System.Int32,GT.Net.SessionAction,System.Byte,GT.Net.MessageDeliveryRequirements,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Send notice of some session action.</summary>
+            <param name="clientId">The subject of the action.</param>
+            <param name="e">The session action.</param>
+            <param name="channelId">Channel on which to send the notice.</param>
+            <param name="mdr">How to send the session message (can be null)</param>
+            <param name="cdr">Requirements for the message's channel.</param>
+        </member>
+        <member name="M:GT.Net.ConnexionToClient.HandleSystemMessage(GT.Net.SystemMessage,GT.Net.ITransport)">
+            <summary>Handles a system message in that it takes the information and does something with it.</summary>
+            <param name="message">The message received.</param>
+            <param name="transport">The transport the message was received on.</param>
+        </member>
+        <member name="P:GT.Net.ConnexionToClient.SendingIdentity">
+            <summary>
+            The server has a unique identity for itself.
+            </summary>
+        </member>
+        <member name="T:GT.Net.NetPacketReceivedHandler">
+            <summary>
+            A delegate for notifying of the reception of a new packet from some remote
+            endpoint.
+            </summary>
+            <param name="remote">the remote endpoint</param>
+            <param name="packet">the packet received</param>
+        </member>
+        <member name="T:GT.Net.UdpMultiplexer">
+            <summary>
+            The UdpMultiplexor demultiplexes traffic from a UDP socket configured on 
+            a particular address/port pair.  <see cref="T:GT.Net.UdpHandle"/> instances generally
+            register to receive messages received from a particular endpoint.  There is a 
+            default handler that is triggered for messages received from previously-unknown
+            remote endpoints (e.g., a new connection); the default handler generally creates
+            a new <see cref="T:GT.Net.UdpHandle"/> to handle subsequent messages from that remote
+            endpoint.
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Create a new instance listening on the specified address/port combination.
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.DisableUdpConnectionResetBehaviour">
+            <summary>Hack to avoid the ConnectionReset/ECONNRESET problem described
+            in <a href="https://papyrus.usask.ca/trac/gt/ticket/41">bug 41</a>.</summary>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.SetDefaultPacketHandler(GT.Net.NetPacketReceivedHandler)">
+            <summary>
+            Configure a default message handler, called for packets received
+            from remote endpoints that have not been sent previously.
+            </summary>
+            <param name="handler">the message handler</param>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.RemoveDefaultPacketHandler">
+            <summary>
+            Discard the default message handler.
+            </summary>
+            <returns>the message handler, or null if there was no handler previously</returns>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.SetPacketHandler(System.Net.EndPoint,GT.Net.NetPacketReceivedHandler)">
+            <summary>
+            Associate a message handler for packets received from the specified 
+            remote endpoint.
+            </summary>
+            <param name="ep">the remote endpoint</param>
+            <param name="handler">the packet handler</param>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.RemovePacketHandler(System.Net.EndPoint)">
+            <summary>
+            Discard the message handler configured for the specified remote endpoint
+            </summary>
+            <param name="ep">the remote endpoint</param>
+            <returns>the old handler, or null if none</returns>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.Update">
+            <summary>
+            Process any incoming messages from the UDP socket.
+            </summary>
+            <exception cref="T:System.Net.Sockets.SocketException">thrown if there is a socket error</exception>
+        </member>
+        <member name="M:GT.Net.UdpMultiplexer.Send(GT.Net.TransportPacket,System.Net.EndPoint)">
+            <summary>
+            Send a packet on the UDP socket.
+            </summary>
+            <exception cref="T:System.Net.Sockets.SocketException">thrown if there is a socket error</exception>
+        </member>
+        <member name="P:GT.Net.UdpMultiplexer.MaximumPacketSize">
+            <summary>
+            Return the maximum packet size that can be sent via this multiplexor
+            </summary>
+        </member>
+        <member name="P:GT.Net.UdpMultiplexer.LocalEndPoint">
+            <summary>
+            Return the description of this local endpoint.
+            </summary>
+        </member>
+        <member name="T:GT.Net.UdpHandle">
+            <summary>
+            A simple class to send and receive packets to/from a remote endpoint.
+            Works in cooperation with the <see cref="T:GT.Net.UdpMultiplexer"/>.
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpHandle.Bind(GT.Net.UdpMultiplexer,System.Net.EndPoint)">
+            <summary>
+            Create and configure a UDP handle for the specified demultiplexor.
+            </summary>
+            <param name="mux"></param>
+            <param name="ep"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GT.Net.UdpHandle.#ctor(System.Net.EndPoint)">
+            <summary>
+            Create a new instance to send and receive messages from the specified 
+            remote endpoint.  This instance is unbound.
+            </summary>
+            <param name="ep">the remote endpoint to be associated with</param>
+        </member>
+        <member name="M:GT.Net.UdpHandle.Send(GT.Net.TransportPacket)">
+            <summary>
+            Send a packet on the UDP socket.
+            </summary>
+            <exception cref="T:System.Net.Sockets.SocketException">thrown if there is a socket error</exception>
+        </member>
+        <member name="M:GT.Net.UdpHandle.Receive">
+            <summary>
+            Pull out a received packet
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:GT.Net.UdpHandle.RemoteEndPoint">
+            <summary>
+            Return the remote's address information
+            </summary>
+        </member>
+        <member name="P:GT.Net.UdpHandle.MaximumPacketSize">
+            <summary>
+            Return the maximum packet size supported
+            </summary>
+        </member>
+        <member name="P:GT.Net.UdpHandle.Available">
+            <summary>
+            Return the number of messages available to be received.
+            </summary>
+        </member>
+        <member name="T:GT.Net.NewTransportHandler">
+            <summary>
+            A delegate specification for methods wishing to be notified of a new
+            transport having been accepted.
+            </summary>
+            <param name="transport">the new transport</param>
+            <param name="capabilities">the capabilities as described by the remote side</param>
+        </member>
+        <member name="T:GT.Net.ValidateTransportArgs">
+            <summary>
+            A class for representing the state required for validating a
+            new transport.  An assessor wishing to reject an incoming transport
+            should either call <see cref="M:GT.Net.ValidateTransportArgs.Reject(System.String)"/> with a human-readable explanation 
+            or set <see cref="P:GT.Net.ValidateTransportArgs.Valid"/> to false.
+            </summary>
+        </member>
+        <member name="M:GT.Net.ValidateTransportArgs.#ctor(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Create a new instance
+            </summary>
+            <param name="t"></param>
+            <param name="capabilities"></param>
+        </member>
+        <member name="M:GT.Net.ValidateTransportArgs.Reject(System.String)">
+            <summary>
+            Indicate that this transport should be rejected, with a human-readable
+            explanation.
+            </summary>
+            <param name="reason">the human-readable explanation as to the rejection</param>
+        </member>
+        <member name="P:GT.Net.ValidateTransportArgs.Transport">
+            <summary>
+            The new transport in question
+            </summary>
+        </member>
+        <member name="P:GT.Net.ValidateTransportArgs.Capabilities">
+            <summary>
+            The capabilities list provided from the remote
+            </summary>
+        </member>
+        <member name="P:GT.Net.ValidateTransportArgs.Valid">
+            <summary>
+            The assessment of whether this transport is valid.  An assessor
+            deciding that the tranport is invalid should either call <see cref="M:GT.Net.ValidateTransportArgs.Reject(System.String)"/>
+            with a human-readable explanation or set <see cref="P:GT.Net.ValidateTransportArgs.Valid"/> to false.
+            </summary>
+        </member>
+        <member name="P:GT.Net.ValidateTransportArgs.Reasons">
+            <summary>
+            This collection contains human-readable explanation as to why the transport
+            has been deemed invalid.  This property may be null.
+            </summary>
+        </member>
+        <member name="T:GT.Millipede.MillipedeAcceptor">
+            <summary>
+            An wrapper around an acceptor for the millipede packet recorder/replayer.
+            The acceptor wrapper is created using one of the Wrap() methods.
+            </summary>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Wrap(GT.Net.IAcceptor,GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Wrap the provided acceptor for use with Millipede.
+            If the Millipede recorder is unconfigured, we cause
+            a dialog to configure the recorder.
+            If the Millipede recorder is configured to be passthrough,
+            we return the acceptor unwrapped.
+            </summary>
+            <param name="acceptor">the acceptor to be wrapped</param>
+            <param name="recorder">the Millipede recorder</param>
+            <returns>an appropriately configured acceptor</returns>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Wrap(System.Collections.Generic.ICollection{GT.Net.IAcceptor},GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Wrap the provided acceptors for use with Millipede.
+            If the Millipede recorder is unconfigured, we cause
+            a dialog to configure the recorder.
+            If the Millipede recorder is configured to be passthrough,
+            we leave the acceptors unwrapped.
+            </summary>
+            <param name="acceptors">the acceptors to be wrapped</param>
+            <param name="recorder">the Millipede recorder</param>
+            <returns>a collection of appropriately configured acceptors</returns>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.#ctor(GT.Net.IAcceptor,GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Instanciates a millipede acceptor and wraps it around an existing underlying
+            IAcceptor.
+            </summary>
+            <param name="underlyingAcceptor">The existing underlying IAcceptor</param>
+            <param name="recorder">The Millipede Replayer/Recorder</param>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.UnderlyingAcceptor_NewTransportEvent(GT.Net.ITransport,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            ITransports use a observer-pattern (implemented with events and callbacks) to notify
+            other GT2 components. Since these other componets register to the MillipedeAcceptor,
+            there must be a mechanism to forward notifications from the IAcceptor to other GT2
+            components.
+            </summary>
+            <see cref="E:GT.Net.IAcceptor.NewTransportAccepted"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Update">
+            <summary>
+            Wraps IAcceptor.Update.
+            </summary>
+            <see cref="M:GT.Net.IAcceptor.Update"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Start">
+            <summary>
+            Wraps IAcceptor.Start.
+            </summary>
+            <see cref="M:GT.IStartable.Start"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Stop">
+            <summary>
+            Wraps IAcceptor.Stop.
+            </summary>
+            <see cref="M:GT.IStartable.Stop"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeAcceptor.Dispose">
+            <summary>
+            Wraps IAcceptor.Dispose.
+            </summary>
+            <see cref="M:System.IDisposable.Dispose"/>
+        </member>
+        <member name="P:GT.Millipede.MillipedeAcceptor.Active">
+            <summary>
+            Wraps IAcceptor.Active.
+            </summary>
+            <see cref="P:GT.IStartable.Active"/>
+        </member>
+        <member name="T:GT.Net.UdpServerTransport">
+            <summary>
+            A server-side UDP transport that uses a <see cref="T:GT.Net.UdpHandle"/> for sending
+            and receiving packets.  Server-side UDP transports must use the 
+            <see cref="T:GT.Net.UdpMultiplexer"/> to share access to the common UDP socket.
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpServerTransport.#ctor(GT.Net.UdpHandle)">
+            <summary>
+            Create a new instance on the provided socket.
+            </summary>
+            <param name="h">the UDP handle to use</param>
+        </member>
+        <member name="M:GT.Net.UdpServerTransport.#ctor(System.UInt32,GT.Net.UdpHandle)">
+            <summary>
+            Constructor provided for subclasses that may have a different PacketHeaderSize
+            </summary>
+            <param name="packetHeaderSize"></param>
+            <param name="h"></param>
+        </member>
+        <member name="T:GT.Net.UdpSequencedServerTransport">
+            <summary>
+            This UDP client implementation adds sequencing capabilities to the
+            the raw UDP protocol to ensure that packets are received in-order,
+            but with no guarantee on the reliability of packet delivery.
+            </summary>
+        </member>
+        <member name="F:GT.Net.UdpSequencedServerTransport.nextIncomingPacketSeqNo">
+            <summary>
+            The sequence number expected for the next packet received.
+            </summary>
+        </member>
+        <member name="F:GT.Net.UdpSequencedServerTransport.nextOutgoingPacketSeqNo">
+            <summary>
+            The sequence number for the next outgoing packet.
+            </summary>
+        </member>
+        <member name="T:GT.Net.UdpAcceptor">
+            <summary>
+            An acceptor for incoming UDP connections.
+            </summary>
+            <remarks>
+            The use of <see cref="T:GT.Net.TransportFactory`1"/> may seem to be a bit complicated,
+            but it greatly simplifies testing.
+            </remarks>
+        </member>
+        <member name="M:GT.Net.UdpAcceptor.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Create an acceptor to accept incoming UDP connections, with no guarantees
+            on ordering or reliability
+            </summary>
+            <param name="address">the local address on which to wait; usually
+                <see cref="F:System.Net.IPAddress.Any"/></param>
+            <param name="port">the local port on which to wait</param>
+        </member>
+        <member name="M:GT.Net.UdpAcceptor.#ctor(System.Net.IPAddress,System.Int32,GT.Net.TransportFactory{GT.Net.UdpHandle}[])">
+            <summary>
+            A constructor more intended for testing purposes
+            </summary>
+            <param name="address">the local address on which to wait; usually
+                <see cref="F:System.Net.IPAddress.Any"/></param>
+            <param name="port">the local port on which to wait</param>
+            <param name="factories">the factories responsible for creating an appropriate
+                <see cref="T:GT.Net.ITransport"/> instance</param>
+        </member>
+        <member name="M:GT.Net.UdpAcceptor.PreviouslyUnseenUdpEndpoint(System.Net.EndPoint,GT.Net.TransportPacket)">
+            <summary>
+            Handle incoming packets from previously-unknown remote endpoints.
+            We check if the packet indicates a handshake and, if so, negotiate.
+            Otherwise we send a GT error message and disregard the packet.
+            </summary>
+            <param name="ep">the remote endpoint</param>
+            <param name="packet">the first packet</param>
+        </member>
+        <member name="P:GT.Net.UdpAcceptor.Factories">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,34 @@
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\bin\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\bin\Debug\CoKeyboard.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\bin\Debug\SmallKeyboard.xml
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\bin\Debug\irrKlang.NET2.0.dll
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\ResolveAssemblyReference.cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CollabDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\SessionDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\SmallKeyboard.frmKeyboard.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.Properties.Resources.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.csproj.GenerateResource.Cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\CoKeyboard.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\SmallKeyboard.xml
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\ResolveAssemblyReference.cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CollabDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\SessionDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\SmallKeyboard.frmKeyboard.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.Properties.Resources.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.csproj.GenerateResource.Cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.pdb
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.pdb
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\CoKeyboard.exe
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\CoKeyboard.pdb
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\bin\Debug\SmallKeyboard.xml
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\ResolveAssemblyReference.cache
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CollabDialog.resources
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\SessionDialog.resources
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\SmallKeyboard.frmKeyboard.resources
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.Properties.Resources.resources
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.csproj.GenerateResource.Cache
+C:\MESA_MULTITOQUE\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\CoKeyboard\obj\Debug\CoKeyboard.exe

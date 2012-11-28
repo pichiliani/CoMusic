@@ -1,0 +1,1189 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GTClient</name>
+    </assembly>
+    <members>
+        <member name="T:GT.Net.UdpClientTransport">
+            <summary>
+            The client varient of <see cref="T:GT.Net.BaseUdpTransport"/>.  This
+            varient uses a dedicated UDP socket.  This implementation uses
+            the raw UDP protocol with no ordering or reliability enhancements.
+            </summary>
+        </member>
+        <member name="F:GT.Net.UdpClientTransport.udpClient">
+            <summary>
+            The UDP socket instance.
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpClientTransport.#ctor(System.Net.Sockets.UdpClient)">
+            <summary>
+            Create a new instance on the provided socket.
+            </summary>
+            <param name="udpc">the UDP socket to use</param>
+        </member>
+        <member name="M:GT.Net.UdpClientTransport.#ctor(System.UInt32,System.Net.Sockets.UdpClient)">
+            <summary>
+            Constructor provided for subclasses that may have a different PacketHeaderSize
+            </summary>
+            <param name="packetHeaderSize"></param>
+            <param name="udpc"></param>
+        </member>
+        <member name="M:GT.Net.UdpClientTransport.FlushOutstandingPackets">
+            <summary> Flushes out old incomingMessages that couldn't be sent because of exceptions</summary>
+            <returns>True if there are bytes that still have to be sent out</returns>
+        </member>
+        <member name="M:GT.Net.UdpClientTransport.FetchIncomingPacket">
+            <summary>
+            Fetch a new incoming packet, triggering any applicable events
+            </summary>
+            <returns>true if a packet was available, false otherwise</returns>
+        </member>
+        <member name="T:GT.Net.UdpSequencedClientTransport">
+            <summary>
+            This UDP client implementation adds sequencing capabilities to the
+            the raw UDP protocol to ensure that packets are received in-order,
+            but with no guarantee on the reliability of packet delivery.
+            </summary>
+        </member>
+        <member name="F:GT.Net.UdpSequencedClientTransport.nextIncomingPacketSeqNo">
+            <summary>
+            The sequence number expected for the next packet received.
+            </summary>
+        </member>
+        <member name="F:GT.Net.UdpSequencedClientTransport.nextOutgoingPacketSeqNo">
+            <summary>
+            The sequence number for the next outgoing packet.
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpSequencedClientTransport.#ctor(System.Net.Sockets.UdpClient)">
+            <summary>
+            Create a new instance using the provided handle
+            </summary>
+            <param name="udpc"></param>
+        </member>
+        <member name="T:GT.Net.StreamedTupleReceivedDelegate`1">
+            <summary>Delegate for tuples.</summary>
+        </member>
+        <member name="T:GT.Net.StreamedTupleReceivedDelegate`2">
+            <summary>Delegate for tuples.</summary>
+        </member>
+        <member name="T:GT.Net.StreamedTupleReceivedDelegate`3">
+            <summary>Delegate for tuples.</summary>
+        </member>
+        <member name="T:GT.Net.IStreamedTuple`1">
+            <summary>
+            A channel carrying a streaming tuple.  Such tuples automatically stream
+            out changes to the tuple at a fixed interval.
+            </summary>
+            <typeparam name="T_X">the type of the first component of the tuple</typeparam>
+        </member>
+        <member name="T:GT.Net.IChannel">
+            <summary>
+            An abstracted channel interface; not intended to be used directly, but
+            represents a base functionality of all channels.  All channel
+            implementations are required to also implement <see cref="T:GT.Net.IUpdatableChannel"/>;
+            implementors may wish to use <see cref="T:GT.Net.AbstractChannel"/>.
+            
+            Note: channels now implement <see cref="T:System.IDisposable"/>: when finished with 
+            a channel, please  be sure to call its <see cref="!:IChannel.Dispose"/> method.
+            </summary>
+            <seealso cref="T:GT.Net.IUpdatableChannel"/>
+            <seealso cref="T:GT.Net.AbstractChannel"/>
+        </member>
+        <member name="M:GT.Net.IChannel.Flush">
+            <summary>Flush all pending messages on this instance.</summary>
+        </member>
+        <member name="E:GT.Net.IChannel.Updated">
+            <summary>
+            This instance has been updated; typically triggered whenever the 
+            owning <see cref="T:GT.Net.Client"/> has finished being updated.
+            </summary>
+        </member>
+        <member name="P:GT.Net.IChannel.Active">
+            <summary>
+            Return true if this instance is active
+            </summary>
+        </member>
+        <member name="P:GT.Net.IChannel.ChannelId">
+            <summary>
+            Return this instance's associated channelId.
+            </summary>
+        </member>
+        <member name="P:GT.Net.IChannel.Identity">
+            <summary>
+            Return the underlying <see cref="P:GT.Net.IConnexion.Identity"/>, a
+            server-unique identity for this client amongst the server's clients.
+            </summary>
+        </member>
+        <member name="P:GT.Net.IChannel.Connexion">
+            <summary>
+            Return this instance's associated connexion.
+            </summary>
+        </member>
+        <member name="P:GT.Net.IChannel.Delay">
+            <summary>
+            Average latency between the client and this particluar server 
+            (in milliseconds).
+            </summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`1.X">
+            <summary>X value</summary>
+        </member>
+        <member name="E:GT.Net.IStreamedTuple`1.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`1.UpdatePeriod">
+            <summary>
+            The frequency at which this tuple's changes should be propagated.
+            </summary>
+        </member>
+        <member name="T:GT.Net.IStreamedTuple`2">
+            <summary>
+            A channel carrying a streaming tuple.  Such tuples automatically stream
+            out changes to the tuple at a fixed interval.
+            </summary>
+            <typeparam name="T_X">the type of the first component of the tuple</typeparam>
+            <typeparam name="T_Y">the type of the second component of the tuple</typeparam>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`2.X">
+            <summary>X value</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`2.Y">
+            <summary>Y value</summary>
+        </member>
+        <member name="E:GT.Net.IStreamedTuple`2.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`2.UpdatePeriod">
+            <summary>
+            The frequency at which this tuple's changes should be propagated.
+            </summary>
+        </member>
+        <member name="T:GT.Net.IStreamedTuple`3">
+            <summary>
+            A channel carrying a streaming tuple.  Such tuples automatically stream
+            out changes to the tuple at a fixed interval.
+            </summary>
+            <typeparam name="T_X">the type of the first component of the tuple</typeparam>
+            <typeparam name="T_Y">the type of the second component of the tuple</typeparam>
+            <typeparam name="T_Z">the type of the third component of the tuple</typeparam>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`3.X">
+            <summary>X value</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`3.Y">
+            <summary>Y value</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`3.Z">
+            <summary>Z value</summary>
+        </member>
+        <member name="E:GT.Net.IStreamedTuple`3.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="P:GT.Net.IStreamedTuple`3.UpdatePeriod">
+            <summary>
+            The frequency at which this tuple's changes should be propagated.
+            </summary>
+        </member>
+        <member name="T:GT.Net.AbstractChannel">
+            <summary>
+            A very base level implementation
+            </summary>
+        </member>
+        <member name="T:GT.Net.IUpdatableChannel">
+            <summary>
+            A specialized interface that channel implementations must implement
+            to be used within the <see cref="T:GT.Net.Client"/> framework.
+            </summary>
+        </member>
+        <member name="M:GT.Net.IUpdatableChannel.Update(GT.HPTimer)">
+            <summary>
+            Notify that all current messages have been enqueued.
+            </summary>
+            <param name="timer">a timer recording the duration since last enqueued</param>
+        </member>
+        <member name="M:GT.Net.AbstractChannel.Flush">
+            <summary>Flush all pending messages on this channel.</summary>
+        </member>
+        <member name="M:GT.Net.AbstractChannel.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Create a new instance
+            </summary>
+            <param name="cnx">the connexion</param>
+            <param name="channelId">the channel's id</param>
+            <param name="cdr">the default delivery requirements for this channel</param>
+        </member>
+        <member name="M:GT.Net.AbstractChannel._cnx_MessageReceived(GT.Net.Message,GT.Net.IConnexion,GT.Net.ITransport)">
+            <remarks>
+            We can't register for fine-grained events, so we have to do the processing 
+            ourselves to ensure the message is actually intended for this channel
+            </remarks>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Active">
+            <summary>
+            Return true if this instance is active
+            </summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.ChannelId">
+            <summary> This instance's channelId. </summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Delay">
+            <summary>Average latency between the client and this particluar server.</summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Identity">
+            <summary> Get the server-unique identity of the client.</summary>
+            <seealso cref="P:GT.Net.IConnexion.Identity"/>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Address">
+            <summary> Get the connexion's destination address </summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Port">
+            <summary>Get the connexion's destination port</summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.Connexion">
+            <summary>
+            Return this instance's connexion.
+            </summary>
+        </member>
+        <member name="P:GT.Net.AbstractChannel.ChannelDeliveryOptions">
+            <summary>
+            Return the default channel delivery requirements to be used
+            when delivery requirements have not been specified.
+            </summary>
+        </member>
+        <member name="M:GT.Net.AbstractStreamedTuple.#ctor(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Create a new streamed tuple for the given connexion and on the given
+            channel.  This tuple should propagate any changes every <see cref="!:updateDelay"/>.
+            </summary>
+            <param name="s">the given connexion</param>
+            <param name="channelId">the channel on which to send and receive updates</param>
+            <param name="updateDelay">the frequency to send our updates</param>
+            <param name="cdr">the delivery requirements to be used in sending or updates</param>
+        </member>
+        <member name="P:GT.Net.AbstractStreamedTuple.UpdatePeriod">
+            <summary>
+            The frequency at which this tuple's changes should be propagated.
+            </summary>
+        </member>
+        <member name="T:GT.Net.StreamedTuple`3">
+            <summary>A three-tuple that is automatically streamed to the other clients.</summary>
+            <typeparam name="T_X">X value</typeparam>
+            <typeparam name="T_Y">Y value</typeparam>
+            <typeparam name="T_Z">Z value</typeparam>
+        </member>
+        <member name="M:GT.Net.StreamedTuple`3.#ctor(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Creates a streaming tuple</summary>
+            <param name="connexion">The connexion to send the tuples on</param>
+            <param name="channelId">the channel</param>
+            <param name="updateTime">Update time for changed tuple</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`3.X">
+            <summary>X value</summary>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`3.Y">
+            <summary>Y value</summary>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`3.Z">
+            <summary>Z value</summary>
+        </member>
+        <member name="E:GT.Net.StreamedTuple`3.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="T:GT.Net.StreamedTuple`2">
+            <summary>A two-tuple that is automatically streamed to the other clients.</summary>
+            <typeparam name="T_X">X value</typeparam>
+            <typeparam name="T_Y">Y value</typeparam>
+        </member>
+        <member name="M:GT.Net.StreamedTuple`2.#ctor(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Creates a streaming tuple</summary>
+            <param name="connexion">The connexion to send the tuples on</param>
+            <param name="channelId">the channel</param>
+            <param name="updateTime">Update time for changed tuple</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`2.X">
+            <summary>X value</summary>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`2.Y">
+            <summary>Y value</summary>
+        </member>
+        <member name="E:GT.Net.StreamedTuple`2.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="T:GT.Net.StreamedTuple`1">
+            <summary>A one-tuple that is automatically streamed to the other clients.</summary>
+            <typeparam name="T_X">X value</typeparam>
+        </member>
+        <member name="M:GT.Net.StreamedTuple`1.#ctor(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Creates a streaming tuple</summary>
+            <param name="connexion">The connexion to send the tuples on</param>
+            <param name="channelId">the channel</param>
+            <param name="updateTime">Update time for changed tuple</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+        </member>
+        <member name="P:GT.Net.StreamedTuple`1.X">
+            <summary>X value</summary>
+        </member>
+        <member name="E:GT.Net.StreamedTuple`1.StreamedTupleReceived">
+            <summary>Occurs when we receive a tuple from someone else.</summary>
+        </member>
+        <member name="T:GT.Net.IConnector">
+            <summary>
+            An object responsible for initiating connections to some remote service.
+            The remote service is often implemented using an <c>IAcceptor</c>.
+            See
+               DC Schmidt (1997). Acceptor and connector: A family of object 
+               creational patterns for initializing communication services. 
+               In R Martin, F Buschmann, D Riehle (Eds.), Pattern Languages of 
+               Program Design 3. Addison-Wesley
+               http://www.cs.wustl.edu/~schmidt/PDF/Acc-Con.pdf
+            FIXME: this interface currently blocks until completion.
+            Perhaps we should be providing an event on connection, with
+            <c>Connect()</c> initiating a connection, and requiring periodic
+            calls to an Update() method.
+            </summary>
+        </member>
+        <member name="M:GT.Net.IConnector.Connect(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Establish a connexion to the provided address and port.  The call is
+            assumed to be blocking.
+            </summary>
+            <param name="address"></param>
+            <param name="port"></param>
+            <param name="capabilities"></param>
+            <returns>the newly connected transport</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if the connector
+                cannot connect to the other side.</exception>
+        </member>
+        <member name="M:GT.Net.IConnector.Responsible(GT.Net.ITransport)">
+            <summary>
+            Return true if this connector was responsible for connecting the provided transport.
+            </summary>
+            <param name="transport">a (presumably, but not necessarily) disconnected) transport</param>
+            <returns>Returns true if this instances was responsible for connecting the provided transport.</returns>
+        </member>
+        <member name="T:GT.Net.UdpConnector">
+            <summary>
+            Class responsible for connecting (and negotiating) a connection to a
+            remote server using UDP.
+            </summary>
+            <remarks>
+            The use of <see cref="T:GT.Net.TransportFactory`1"/> may seem to be a bit complicated,
+            but it greatly simplifies testing.
+            </remarks>
+        </member>
+        <member name="M:GT.Net.UdpConnector.#ctor">
+            <summary>
+            The default constructor is for an unordered, unsequenced UDP
+            </summary>
+        </member>
+        <member name="M:GT.Net.UdpConnector.#ctor(GT.Net.Ordering)">
+            <summary>
+            Create a new instance for handling UDP connections providing
+            specified ordering requirements.
+            </summary>
+            <param name="ordering"></param>
+        </member>
+        <member name="M:GT.Net.UdpConnector.#ctor(GT.Net.TransportFactory{System.Net.Sockets.UdpClient})">
+            <summary>
+            Create a new instance using the provided transport factory
+            </summary>
+            <param name="factory"></param>
+        </member>
+        <member name="M:GT.Net.UdpConnector.ShakeHands(System.Net.Sockets.UdpClient,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Attempt connection negotiation with remote side.
+            </summary>
+            <exception cref="T:System.Net.Sockets.SocketException">thrown on socket error</exception>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if the remote endpoint
+            cannot be resolved.</exception>
+        </member>
+        <member name="M:GT.Net.UdpConnector.CreateHandshakeOffering(System.Net.Sockets.UdpClient,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Create the handshake initiation message.
+            </summary>
+            <param name="client"></param>
+            <param name="capabilities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GT.Net.UdpConnector.ValidateHandshakeReply(System.Net.Sockets.UdpClient,System.Byte[])">
+            <summary>
+            Validate the reply message to see if the connection was accepted.
+            </summary>
+            <param name="client">the socket on which the message was received</param>
+            <param name="reply">the reply message received</param>
+            <returns>true if accepted, false if the reply was incorrect</returns>
+            <exception cref="T:GT.Net.CannotConnectException">if not accepted</exception>
+        </member>
+        <member name="P:GT.Net.UdpConnector.ProtocolDescriptor">
+            <summary>
+            Return the protocol descriptor talked by this instance.
+            </summary>
+        </member>
+        <member name="P:GT.Net.UdpConnector.MaximumRetries">
+            <summary>
+            Number of times to retry handshake negotiation.
+            </summary>
+        </member>
+        <member name="P:GT.Net.UdpConnector.NegotiationTimeout">
+            <summary>
+            Amount of time to wait for a return on negotiation.
+            </summary>
+        </member>
+        <member name="T:GT.Net.DelayedBinaryChannel">
+            <summary>
+            Injects a certain amount of latency into the sending or receiving from this connexion.
+            </summary>
+        </member>
+        <member name="F:GT.Net.DelayedBinaryChannel.Messages">
+            <summary>
+            The incomingMessages which have been received by this connexion, after the 
+            injected delay has passed
+            </summary>
+        </member>
+        <member name="M:GT.Net.DelayedBinaryChannel.#ctor(GT.Net.IBinaryChannel,System.TimeSpan)">
+            <summary>Delays the sending and receiving of incomingMessages by 'injectedDelay' milliseconds.
+            </summary>
+            <param name="bs">The binary connexion to use to send and receive on.</param>
+            <param name="injectedDelay">delay time to inject</param>
+        </member>
+        <member name="M:GT.Net.DelayedBinaryChannel.Send(System.Byte[])">
+            <summary>Sends a message after waiting a certain amount of time
+            </summary>
+            <param name="b">bytes to send as a message</param>
+        </member>
+        <member name="M:GT.Net.DelayedBinaryChannel.SendCheck">
+            <summary>Checks to see if anything queued should be sent.
+            The sending resolution of this connexion is as good as 
+            the frequency this method and the Send method are called.
+            </summary>
+        </member>
+        <member name="M:GT.Net.DelayedBinaryChannel.DequeueMessage(System.Int32)">
+            <summary>Dequeues the oldest message that is ready to be received
+            </summary>
+            <param name="index">the index of the message to dequeue</param>
+            <returns>the oldest message</returns>
+        </member>
+        <member name="P:GT.Net.DelayedBinaryChannel.InjectedDelay">
+            <summary>
+            The milliseconds of delay injected into messages sent on the channel
+            </summary>
+        </member>
+        <member name="T:GT.Net.IContentChannel`3">
+            <summary>
+            A channel carrying content items, as compared to streaming channels that
+            carry content updates.
+            </summary>
+            <typeparam name="SI">The type of generic items supported by this channel.</typeparam>
+            <typeparam name="RI">The type of received items, which is generally expected to be
+                the same as <c>SI</c>.  Some special channels, such as <see cref="T:GT.Net.ISessionChannel"/>,
+                return more complex objects.</typeparam>
+            <typeparam name="ST">The type of this channel.</typeparam>
+        </member>
+        <member name="M:GT.Net.IContentChannel`3.Send(`0)">
+            <summary>Send an item to the server</summary>
+            <param name="item">The item</param>
+        </member>
+        <member name="M:GT.Net.IContentChannel`3.Send(`0,GT.Net.MessageDeliveryRequirements)">
+            <summary>Send an item to the server</summary>
+            <param name="item">The item</param>
+            <param name="mdr">How to send it</param>
+        </member>
+        <member name="M:GT.Net.IContentChannel`3.DequeueMessage(System.Int32)">
+            <summary>
+            Remove and return the content of the message found at the specified index
+            of the queue of received messages.</summary>
+            <param name="count">The message to be dequeued, with a higher number indicating a newer message.</param>
+            <returns>The message content, or null if the content could not be obtained.</returns>
+        </member>
+        <member name="P:GT.Net.IContentChannel`3.Count">
+            <summary>Return the number of waiting messages.</summary>
+            <returns>The number of waiting messages; 0 indicates there are no waiting message.</returns>
+        </member>
+        <member name="P:GT.Net.IContentChannel`3.Messages">
+            <summary>Received messages from the server.</summary>
+        </member>
+        <member name="E:GT.Net.IContentChannel`3.MessagesReceived">
+            <summary>
+            Triggered when this channel has new messages; there may be multiple messages.
+            </summary>
+        </member>
+        <member name="T:GT.Net.ISessionChannel">
+            <summary>A content-bearing channel carrying session events.</summary>
+        </member>
+        <member name="T:GT.Net.IStringChannel">
+            <summary>A content-bearing channel carrying strings.</summary>
+        </member>
+        <member name="T:GT.Net.IObjectChannel">
+            <summary>A content-bearing channel carrying objects.</summary>
+        </member>
+        <member name="T:GT.Net.IBinaryChannel">
+            <summary>A content-bearing channel carrying byte arrays.</summary>
+        </member>
+        <member name="T:GT.Net.AbstractContentChannel`3">
+            <summary>
+            The base implementation for content-bearing channels.
+            We differentiate between <typeparamref name="SI"/> and <typeparamref name="RI"/>
+            as some channels, particularly the session channel, send and return 
+            different types of items.
+            </summary>
+            <typeparam name="SI">the type of items carried</typeparam>
+            <typeparam name="RI">the type of returned items</typeparam>
+            <typeparam name="ST">the actual top-level type of this instance</typeparam>
+        </member>
+        <member name="M:GT.Net.AbstractContentChannel`3.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Create a channel object.</summary>
+            <param name="cnx">The connexion used to actually send the messages.</param>
+            <param name="channelId">The channelId.</param>
+            <param name="cdr">The channel delivery options.</param>
+        </member>
+        <member name="M:GT.Net.AbstractContentChannel`3.GetMessageContents(GT.Net.Message,`1@)">
+            <summary>
+            Extract the appropriate typed object from the provided message.
+            </summary>
+            <param name="m">the message</param>
+            <param name="contents">the appropriately-typed object content from the message</param>
+            <returns>true if the contents was successfully extracted</returns>
+        </member>
+        <member name="M:GT.Net.AbstractContentChannel`3._cnx_MessageReceived(GT.Net.Message,GT.Net.IConnexion,GT.Net.ITransport)">
+            <summary>Queue a message in the list, triggering events</summary>
+            <param name="message">The message to be queued.</param>
+            <param name="client">The connexion receiving the message</param>
+            <param name="transport">The actual transport from which the message was received</param>
+        </member>
+        <member name="P:GT.Net.AbstractContentChannel`3.Messages">
+            <summary>Received messages from the server.</summary>
+        </member>
+        <member name="P:GT.Net.AbstractContentChannel`3.CastedChannel">
+            <summary>Obtain a properly typed variant of this channel.</summary>
+        </member>
+        <member name="T:GT.Net.SessionChannel">
+            <summary>A connexion of session events.</summary>
+        </member>
+        <member name="M:GT.Net.SessionChannel.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Create a SessionChannel object.</summary>
+            <param name="cnx">The connexion to use to actually send the messages.</param>
+            <param name="channelId">The message channel.</param>
+            <param name="cdr">The channel delivery options.</param>
+        </member>
+        <member name="M:GT.Net.SessionChannel.Send(GT.Net.SessionAction,GT.Net.MessageDeliveryRequirements)">
+            <summary>Send a session action to the server.</summary>
+            <param name="action">The action.</param>
+            <param name="mdr">Message delivery options</param>
+        </member>
+        <member name="T:GT.Net.StringChannel">
+            <summary>A connexion of strings.</summary>
+        </member>
+        <member name="M:GT.Net.StringChannel.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Create a StringChannel object.</summary>
+            <param name="cnx">The connexion to use to actually send the messages.</param>
+            <param name="channelId">The message channel.</param>
+            <param name="cdr">The channel delivery options.</param>
+        </member>
+        <member name="M:GT.Net.StringChannel.Send(System.String,GT.Net.MessageDeliveryRequirements)">
+            <summary>Send a string to the server, specifying how.</summary>
+            <param name="s">The string to send.</param>
+            <param name="mdr">Message delivery options</param>
+        </member>
+        <member name="T:GT.Net.ObjectChannel">
+            <summary>A connexion of Objects.</summary>
+        </member>
+        <member name="M:GT.Net.ObjectChannel.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Create an ObjectChannel object.</summary>
+            <param name="cnx">The connexion to use to actually send the objects.</param>
+            <param name="channelId">The message channel claimed.</param>
+            <param name="cdr">The channel delivery options.</param>
+        </member>
+        <member name="M:GT.Net.ObjectChannel.Send(System.Object,GT.Net.MessageDeliveryRequirements)">
+            <summary>Send an object using the specified method.</summary>
+            <param name="o">The object to send.</param>
+            <param name="mdr">Message delivery options</param>
+        </member>
+        <member name="T:GT.Net.BinaryChannel">
+            <summary>A connexion of byte arrays.</summary>
+        </member>
+        <member name="M:GT.Net.BinaryChannel.#ctor(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Creates a BinaryChannel object.</summary>
+            <param name="cnx">The connexion object on which to actually send the objects.</param>
+            <param name="channelId">The message channel to claim.</param>
+            <param name="cdr">The channel delivery options.</param>
+        </member>
+        <member name="M:GT.Net.BinaryChannel.Send(System.Byte[],GT.Net.MessageDeliveryRequirements)">
+            <summary>Send a byte array using the specified method.</summary>
+            <param name="b">The byte array to send.</param>
+            <param name="mdr">Message delivery options</param>
+        </member>
+        <member name="T:GT.Net.IAddressableConnexion">
+            <summary>
+            An interface for those connexions that have an addressable remote sendpoint.
+            </summary>
+        </member>
+        <member name="P:GT.Net.IAddressableConnexion.Address">
+            <summary>
+            Return the address component used in creating this connexion
+            </summary>
+        </member>
+        <member name="P:GT.Net.IAddressableConnexion.Port">
+            <summary>
+            Return the port component used in creating this connexion
+            </summary>
+        </member>
+        <member name="T:GT.Net.ConnexionToServer">
+            <summary>Controls the sending of messages to a particular server.</summary>
+        </member>
+        <member name="M:GT.Net.ConnexionToServer.#ctor(GT.Net.Client,System.String,System.String)">
+            <summary>Create a new connexion to a server.</summary>
+            <param name="owner">The owning client.</param>
+            <param name="address">Who to try to connect to.</param>
+            <param name="port">Which port to connect to.</param>
+        </member>
+        <member name="M:GT.Net.ConnexionToServer.Start">
+            <summary>
+            Start this instance.
+            </summary>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if we cannot
+            connect to the specified server.</exception>
+        </member>
+        <member name="M:GT.Net.ConnexionToServer.HandleSystemMessage(GT.Net.SystemMessage,GT.Net.ITransport)">
+            <summary>Deal with a system message in whatever way we need to.</summary>
+            <param name="message">The incoming message.</param>
+            <param name="transport">The transport from which the message
+             came.</param>
+        </member>
+        <member name="P:GT.Net.ConnexionToServer.Marshaller">
+            <summary>
+            Return the marshaller configured for this connexion's client.
+            </summary>
+        </member>
+        <member name="P:GT.Net.ConnexionToServer.ClientGuid">
+            <summary>
+            Return the globally unique identifier for the client
+            represented by this connexion.
+            </summary>
+        </member>
+        <member name="P:GT.Net.ConnexionToServer.Address">
+            <summary>
+            Return the address component used in creating this connexion
+            </summary>
+        </member>
+        <member name="P:GT.Net.ConnexionToServer.Port">
+            <summary>
+            Return the port component used in creating this connexion
+            </summary>
+        </member>
+        <member name="P:GT.Net.ConnexionToServer.SendingIdentity">
+            <summary>
+            Our unique identifier is the identifier bestowed upon us by the server.
+            </summary>
+        </member>
+        <member name="T:GT.Net.ClientConfiguration">
+            <summary>
+            This class specifies the policy choices required for
+            <see cref="T:GT.Net.Client"/> instances.
+            </summary>
+        </member>
+        <member name="M:GT.Net.ClientConfiguration.CreateMarshaller">
+            <summary>
+            Create the marsheller for the server instance.
+            </summary>
+            <returns>the marshaller</returns>
+        </member>
+        <member name="M:GT.Net.ClientConfiguration.CreateConnectors">
+            <summary>
+            Create the appropriate transport connectors.
+            </summary>
+            <returns>a collection of connectors</returns>
+        </member>
+        <member name="M:GT.Net.ClientConfiguration.BuildClient">
+            <summary>
+            Create a client instance as repreented by this configuration instance.
+            </summary>
+            <returns>the created client</returns>
+        </member>
+        <member name="M:GT.Net.ClientConfiguration.CreateServerConnexion(GT.Net.Client,System.String,System.String)">
+            <summary>
+            Create an connexion representing a server.
+            </summary>
+            <param name="owner">the associated client instance</param>
+            <param name="address">the server's address component</param>
+            <param name="port">the server's port component</param>
+            <returns>the server connexion</returns>
+        </member>
+        <member name="T:GT.Net.DefaultClientConfiguration">
+            <summary>
+            A sample client configuration.  <strong>This class definition may change 
+            in dramatic  ways in future releases.</strong>  This configuration should 
+            serve only as an example, and applications should make their own client 
+            configurations by copying this instance.  
+            </summary>
+        </member>
+        <member name="F:GT.Net.DefaultClientConfiguration.port">
+            <summary>
+            The default port used when connecting
+            </summary>
+        </member>
+        <member name="T:GT.Net.Client">
+            <summary>Represents a client that can connect to multiple servers.</summary>
+        </member>
+        <member name="F:GT.Net.Client.channels">
+            <summary>
+            The currently opened channels.
+            </summary>
+        </member>
+        <member name="M:GT.Net.Client.#ctor">
+            <summary>
+            Creates a Client object using the default configuration.
+            </summary>
+        </member>
+        <member name="M:GT.Net.Client.#ctor(GT.Net.ClientConfiguration)">
+            <summary>
+            Create a new client instance using the provided configuration
+            </summary>
+            <param name="cc">the configuration object</param>
+        </member>
+        <member name="M:GT.Net.Client.Start">
+            <summary>
+            Start the instance.  Starting an instance may throw an exception on error.
+            </summary>
+        </member>
+        <member name="M:GT.Net.Client.Stop">
+            <summary>
+            Stop the instance.  Instances can be stopped multiple times.
+            Stopping an instance may throw an exception on error.
+            </summary>
+        </member>
+        <member name="M:GT.Net.Client.Dispose">
+            <summary>
+            Dispose of any system resources that may be held onto by this
+            instance.  Instances 
+            </summary>
+        </member>
+        <member name="M:GT.Net.Client.RecordChannel(System.Byte,GT.Net.IChannel)">
+            <summary>
+            Associate the provided channel object with the provided channel id.
+            </summary>
+            <param name="channelId">the channel id</param>
+            <param name="channel">the channel object</param>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``3(System.String,System.String,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple: changes to a streaming tuples are automatically sent to the 
+            server periodically.
+            </summary>
+            <typeparam name="T_X">The Type of the first value of the tuple</typeparam>
+            <typeparam name="T_Y">The Type of the second value of the tuple</typeparam>
+            <typeparam name="T_Z">The Type of the third value of the tuple</typeparam>
+            <param name="address">The address to connect to</param>
+            <param name="port">The port to connect to</param>
+            <param name="channelId">The channel to use for this three-tuple (unique to three-tuples)</param>
+            <param name="updateInterval">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``3(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple that is automatically sent to the server periodically.
+            It is the caller's responsibility to ensure <see cref="!:connexion"/> 
+            is still active.
+            </summary>
+            <typeparam name="T_X">The Type of the first value of the tuple</typeparam>
+            <typeparam name="T_Y">The Type of the second value of the tuple</typeparam>
+            <typeparam name="T_Z">The Type of the third value of the tuple</typeparam>
+            <param name="connexion">The stream to use to send the tuple</param>
+            <param name="channelId">The channel to use for this three-tuple (unique to three-tuples)</param>
+            <param name="updateInterval">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``2(System.String,System.String,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple that is automatically sent to the server periodically.
+            </summary>
+            <typeparam name="T_X">The Type of the first value of the tuple</typeparam>
+            <typeparam name="T_Y">The Type of the second value of the tuple</typeparam>
+            <param name="address">The address to connect to</param>
+            <param name="port">The port to connect to</param>
+            <param name="channelId">The channel to use for this two-tuple (unique to two-tuples)</param>
+            <param name="updateInterval">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``2(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple that is automatically sent to the server periodically.
+            It is the caller's responsibility to ensure <see cref="!:connexion"/> 
+            is still active.
+            </summary>
+            <typeparam name="T_X">The Type of the first value of the tuple</typeparam>
+            <typeparam name="T_Y">The Type of the second value of the tuple</typeparam>
+            <param name="connexion">The stream to use to send the tuple</param>
+            <param name="channelId">The channel to use for this two-tuple (unique to two-tuples)</param>
+            <param name="updateDelay">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``1(System.String,System.String,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple that is automatically sent to the server periodically.
+            </summary>
+            <typeparam name="T_X">The Type of the value of the tuple</typeparam>
+            <param name="address">The address to connect to</param>
+            <param name="port">The port to connect to</param>
+            <param name="channelId">The channel to use for this one-tuple (unique to one-tuples)</param>
+            <param name="updateDelay">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenStreamedTuple``1(GT.Net.IConnexion,System.Byte,System.TimeSpan,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Get a streaming tuple that is automatically sent to the server periodically. 
+            It is the caller's responsibility to ensure <see cref="!:connexion"/> 
+            is still active.
+            </summary>
+            <typeparam name="T_X">The Type of the first value of the tuple</typeparam>
+            <param name="connexion">The connexion to use to send the tuple</param>
+            <param name="channelId">The channel to use for this one-tuple (unique to one-tuples)</param>
+            <param name="updateDelay">The interval between updates</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The streaming tuple</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenSessionChannel(System.String,System.String,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Opens a channel for managing the session to this server.</summary>
+            <param name="address">The address to connect to.</param>
+            <param name="port">The port to connect to.</param>
+            <param name="channelId">The channel to claim or retrieve.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved SessionChannel</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenSessionChannel(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Opens a channel for managing the session to this server.  It is
+            the caller's responsibility to ensure <see cref="!:connexion"/> is still active.
+            </summary>
+            <param name="connexion">The connexion to use for the connexion.</param>
+            <param name="channelId">The channel to claim or retrieve.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved SessionChannel</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenStringChannel(System.String,System.String,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Opens a channel for transmitting strings.</summary>
+            <param name="address">The address to connect to.</param>
+            <param name="port">The port to connect to.</param>
+            <param name="channelId">The channel to claim.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved IStringChannel</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenStringChannel(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>
+            Opens a channel for transmitting strings.  It is
+            the caller's responsibility to ensure <see cref="!:connexion"/> is still active.
+            </summary>
+            <param name="connexion">The connexion to use for the channel</param>
+            <param name="channelId">The channel to claim</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved IStringChannel</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenObjectChannel(System.String,System.String,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Opens a channel for transmitting objects.</summary>
+            <param name="address">The address to connect to.</param>
+            <param name="port">The port to connect to.</param>
+            <param name="channelId">The channel.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved ObjectChannel</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenObjectChannel(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Opens a channel for transmitting objects.  It is
+            the caller's responsibility to ensure <see cref="!:connexion"/> is still active.</summary>
+            <param name="connexion">The connexion to use for the channel.</param>
+            <param name="channelId">The channelId.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved ObjectChannel</returns>
+        </member>
+        <member name="M:GT.Net.Client.OpenBinaryChannel(System.String,System.String,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Gets a connexion for transmitting byte arrays.</summary>
+            <param name="address">The address to connect to.</param>
+            <param name="port">The port to connect to.</param>
+            <param name="channelId">The channel.</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved BinaryChannel.</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if connexion could not be established</exception>
+        </member>
+        <member name="M:GT.Net.Client.OpenBinaryChannel(GT.Net.IConnexion,System.Byte,GT.Net.ChannelDeliveryRequirements)">
+            <summary>Gets a connexion for transmitting byte arrays.  It is
+            the caller's responsibility to ensure <see cref="!:connexion"/> is still active.</summary>
+            <param name="connexion">The connexion to use for the connexion.</param>
+            <param name="channelId">The channel</param>
+            <param name="cdr">The delivery requirements for this channel</param>
+            <returns>The created or retrieved BinaryChannel.</returns>
+        </member>
+        <member name="M:GT.Net.Client.GetConnexion(System.String,System.String)">
+            <summary>Gets a server connexion; if no such connexion exists establish one.</summary>
+            <param name="address">The address to connect to.</param>
+            <param name="port">The port to connect to.</param>
+            <returns>The created or retrieved connexion itself.</returns>
+            <exception cref="T:GT.Net.CannotConnectException">thrown if the
+                remote could not be contacted.</exception>
+        </member>
+        <member name="M:GT.Net.Client.Update">
+            <summary>
+            Run a cycle to process any pending events for the connexions or
+            other related objects for this instance.  This method is <strong>not</strong> 
+            re-entrant and should not be called from GT callbacks.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Client.Marshaller">
+            <summary>
+            Return the marshaller configured for this client.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Client.Configuration">
+            <summary>
+            Return the configuration guiding this instance.  This
+            configuration acts as both a factory, responsible for 
+            building the objects used by a client, as well as providing
+            policy guidance.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Client.Capabilities">
+            <summary>
+            Return a dictionary describing the capabilities and requirements 
+            of this instance.  Used during handshaking when establishing new transports.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Client.Connectors">
+            <summary>
+            Return the configured connector; these are responsible for establishing
+            new connections (<see cref="T:GT.Net.ITransport"/>) to servers.
+            </summary>
+        </member>
+        <member name="P:GT.Net.Client.Active">
+            <summary>
+            Return true if the instance has been started (<see cref="M:GT.Net.Client.Start"/>)
+            and neither stopped nor disposed (<see cref="M:GT.Net.Client.Stop"/> and 
+            <see cref="M:GT.Net.Client.Dispose"/>).
+            </summary>
+        </member>
+        <member name="T:GT.Net.Frame">
+            <summary>Used to set a certain event to only occur every so often.  (Thread-safe)</summary>
+        </member>
+        <member name="F:GT.Net.Frame.Interval">
+            <summary>A hit will only occur once during this interval, otherwise it will miss.</summary>
+        </member>
+        <member name="M:GT.Net.Frame.#ctor(System.Double)">
+            <summary></summary>
+        </member>
+        <member name="M:GT.Net.Frame.SlipTrigger(System.Object[])">
+            <summary>Throw either a hit or a miss.</summary>
+        </member>
+        <member name="E:GT.Net.Frame.FrameHit">
+            <summary>Triggered on a hit</summary>
+        </member>
+        <member name="E:GT.Net.Frame.FrameMissed">
+            <summary>Triggered on a miss</summary>
+        </member>
+        <member name="T:GT.Net.Frame.FrameDelegate">
+            <summary>This method will handle a hit or a miss.</summary>
+        </member>
+        <member name="T:GT.Net.SimpleSharedDictionary">
+            <summary>
+            This is a very simple implementation of a shared dictionary.  It can be used
+            like an array of serializable objects of unknown size, where strings are used 
+            as keys.  If an object is put inside the array, it is pushed to other copies
+            of the dictionary connected to the same network and channel.  If an object is
+            taken from the array, the latest cached copy is returned.  If there is no
+            cached copy yet (that is, if the client is relatively new), then null is returned,
+            but the object is requested from other shared dictionaries on the network and 
+            channelId.  The emergent behaviour is a very simple shared dictionary that performs
+            extremely fast reads but expensive writes, and is ideal for non-streaming datasets.
+            Examples of information that would be great to store in this dictionary would be
+            user information like colour, preferences, avatar appearance, and object descriptions.
+            Consistancy is achieved by assuming that each client only writes to their own keys,
+            like "myclientname/objectname/whatever", or that writes are infrequeny enough that
+            there is very little chance that two client will try to write to an object at the same
+            time.  When an object is changed, an event is triggered describing which object has
+            been updated.
+            </summary>
+        </member>
+        <member name="F:GT.Net.SimpleSharedDictionary.Master">
+            <summary>
+            Keys on this list will not be updated from the network.  This is useful for security
+            purposes, to prevent someone else from changing your own telepointer or avatar position or
+            whatever else without your permission.
+            </summary>
+        </member>
+        <member name="M:GT.Net.SimpleSharedDictionary.#ctor(GT.Net.IObjectChannel)">
+            <summary>Create a new shared dictionary.</summary>
+            <param name="s">A networked object channel.</param>
+        </member>
+        <member name="M:GT.Net.SimpleSharedDictionary.ContainsKey(System.String)">
+            <summary>
+            Does this instance contain a value for <c>key</c>?  A false result does not mean that
+            the group dictionary does not actually contain this value.  This method
+            is mostly for testing purposes.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GT.Net.SimpleSharedDictionary.PullKey(System.String)">
+            <summary>
+            Request the value for a particular key.
+            </summary>
+            <param name="key">the requested key</param>
+        </member>
+        <member name="M:GT.Net.SimpleSharedDictionary.PushKey(System.String,System.Object)">
+            <summary>
+            Push a change to the specified key.
+            </summary>
+            <param name="key">the revised key</param>
+            <param name="obj">the new value</param>
+        </member>
+        <member name="M:GT.Net.SimpleSharedDictionary.Flush">
+            <summary>
+            Flush out any changes.
+            </summary>
+        </member>
+        <member name="E:GT.Net.SimpleSharedDictionary.Changed">
+            <summary>
+            Triggered when a key has been updated
+            </summary>
+        </member>
+        <member name="P:GT.Net.SimpleSharedDictionary.Item(System.String)">
+            <summary>
+            Treat this shared dictionary as an array.  Remember that changes are only broadcast when
+            an object is put back into it.
+            </summary>
+            <param name="key">A string of any length representing a dictionary key</param>
+            <returns>An object tied to this key</returns>
+        </member>
+        <member name="P:GT.Net.SimpleSharedDictionary.Identity">
+            <summary>
+            A unique number that no other client has in relation to this server.
+            If zero, don't use.  It will be assigned a unique number by the server soon after connecting.
+            </summary>
+            <seealso cref="P:GT.Net.IChannel.Identity"/>
+        </member>
+        <member name="T:GT.Net.SimpleSharedDictionary.Change">
+            <summary>
+            This method will handle a change event
+            </summary>
+            <param name="key">The key that has been changed</param>
+        </member>
+        <member name="T:GT.Net.AggregatingSharedDictionary">
+            <summary>
+            A simple aggregating shared dictionary.  The same effect can
+            be obtained providing the object channel is aggregating.
+            </summary>
+        </member>
+        <member name="M:GT.Net.AggregatingSharedDictionary.#ctor(GT.Net.IObjectChannel,System.TimeSpan)">
+            <summary>Create a new shared dictionary.</summary>
+            <param name="s">A networked object channel.</param>
+            <param name="updateTime">Batch updates until this amount of time has passed.</param>
+        </member>
+        <member name="T:GT.Millipede.MillipedeConnector">
+            <summary>
+            Connector for the millipede debugger. It wrapps around an existing underlying IConnector
+            and adds file in-/output facilities.
+            </summary>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Wrap(GT.Net.IConnector,GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Wrap the provided connector for use with Millipede.
+            If the Millipede recorder is unconfigured, we cause
+            a dialog to configure the recorder.
+            If the Millipede recorder is configured to be passthrough,
+            we return the connector unwrapped.
+            </summary>
+            <param name="connector">the connector to be wrapped</param>
+            <param name="recorder">the Millipede recorder</param>
+            <returns>an appropriately configured connector</returns>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Wrap(System.Collections.Generic.ICollection{GT.Net.IConnector},GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Wrap the provided connectors for use with Millipede.
+            If the Millipede recorder is unconfigured, we cause
+            a dialog to configure the recorder.
+            If the Millipede recorder is configured to be passthrough,
+            we leave the connectors unwrapped.
+            </summary>
+            <param name="connectors">the acceptors to be wrapped</param>
+            <param name="recorder">the Millipede recorder</param>
+            <returns>a collection of appropriately configured acceptors</returns>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.#ctor(GT.Net.IConnector,GT.Millipede.MillipedeRecorder)">
+            <summary>
+            Create a recording recorder that wraps around an existing underlying
+            IConnector.
+            </summary>
+            <param name="underlyingConnector">The existing underlying IConnector</param>
+            <param name="recorder">The Millipede Replayer/Recorder</param>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Connect(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Wraps IConnector.Connect. In addition, writes data to a sink if MillipedeConnector is
+            initialized with Mode.Record. The returning ITransport is wrapped in a
+            MillipedeTransport.
+            </summary>
+            <seealso cref="M:GT.Net.IConnector.Connect(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Responsible(GT.Net.ITransport)">
+            <summary>
+            Wraps IConnector.Responsible.
+            </summary>
+            <see cref="M:GT.Net.IConnector.Responsible(GT.Net.ITransport)"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Start">
+            <summary>
+            Wraps IConnector.Start. In addition, writes data to a sink if MillipedeTransport
+            initialized with Mode.Record.
+            </summary>
+            <see cref="M:GT.IStartable.Start"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Stop">
+            <summary>
+            Wraps IConnector.Stop. In addition, writes data to a sink if MillipedeTransport
+            initialized with Mode.Record.
+            </summary>
+            <see cref="M:GT.IStartable.Stop"/>
+        </member>
+        <member name="M:GT.Millipede.MillipedeConnector.Dispose">
+            <summary>
+            Wraps IConnector.Dispose. In addition, writes data to a sink if MillipedeTransport
+            initialized with Mode.Record and stores the data of the disposed IConnection
+            persistantly.
+            </summary>
+            <see cref="M:System.IDisposable.Dispose"/>
+        </member>
+        <member name="P:GT.Millipede.MillipedeConnector.Active">
+            <summary>
+            Wraps IConnector.Active.
+            </summary>
+            <see cref="P:GT.IStartable.Active"/>
+        </member>
+        <member name="T:GT.Net.TcpConnector">
+            <summary>
+            A connector for initiating and negotiation a new
+            transport connection across TCP.  
+            See also GT.Net.TcpAcceptor.
+            </summary>
+        </member>
+        <member name="M:GT.Net.TcpConnector.#ctor">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
+        <member name="P:GT.Net.TcpConnector.ProtocolDescriptor">
+            <summary>
+            The on-wire protocol version used by this connector
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,13 @@
+Para compilar:
+
+1) Executar o arquivo caminho.bat
+2) Entrar no diretório /TuxGuitar e executar o comando: ant
+3) Executar o programa: /TuxGuitar/java -jar tuxguitar.jar
+
+Compilar plug-in
+
+1) Entrar no diretório do plug-in (ex: /TuxGuitar-midi) 
+2) Compilar com o comando: ant
+3) Copiar o binário para /TuxGuitar/share/plugins
+4) Entrar no diretório /TuxGuitar e executar o comando: ant package
+5) Executar o programa: /TuxGuitar/java -jar tuxguitar.jar

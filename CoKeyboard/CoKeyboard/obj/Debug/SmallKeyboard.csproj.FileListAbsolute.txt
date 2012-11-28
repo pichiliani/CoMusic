@@ -1,0 +1,14 @@
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\bin\Debug\SmallKeyboard.xml
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\ResolveAssemblyReference.cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\SmallKeyboard.frmKeyboard.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\SmallKeyboard.Properties.Resources.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\SmallKeyboard.csproj.GenerateResource.Cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\bin\Debug\irrKlang.NET2.0.dll
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\CollabDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\SessionDialog.resources
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\bin\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\bin\Debug\CoKeyboard.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\SmallKeyboard\SmallKeyboard\obj\Debug\CoKeyboard.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\CoKeyboard\ColKeyboard\obj\Debug\CoKeyboard.pdb

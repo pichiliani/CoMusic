@@ -1,0 +1,7 @@
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\obj\Debug\CollabServer.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\obj\Debug\CollabServer.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\bin\Debug\CollabServer.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\bin\Debug\CollabServer.pdb
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\ServerTeste\obj\Debug\ResolveAssemblyReference.cache
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\obj\Debug\CollabServer.exe
+C:\Meus documentos\pos\Tese\ArtigoMaoVideoConferencia\piano\AppPiano\MusicServer\obj\Debug\CollabServer.pdb
